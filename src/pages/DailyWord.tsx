@@ -1,17 +1,7 @@
-import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Box,
-  Button,
-  Flex,
-  Text,
-} from "@chakra-ui/react";
+import { Accordion, Flex, Text } from "@chakra-ui/react";
 import { FC, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { FiVolume2 } from "react-icons/fi";
+import WordCard from "../components/WordCard";
 
 const DailyWord: FC = () => {
   const navigate = useNavigate();
@@ -43,26 +33,7 @@ const DailyWord: FC = () => {
       </Flex>
       <Accordion mt={8} allowMultiple>
         {state.wordData.sentences.map((v: ISentence, i: number) => (
-          <AccordionItem key={i}>
-            <h2>
-              <AccordionButton>
-                <Box as="span" flex="1" textAlign="left">
-                  {v.english}
-                </Box>
-                <AccordionIcon />
-              </AccordionButton>
-              <Button
-                variant="ghost"
-                colorScheme="green"
-                size="sm"
-                mb={2}
-                ml={2}
-              >
-                <FiVolume2 />
-              </Button>
-            </h2>
-            <AccordionPanel pb={4}>{v.korean}</AccordionPanel>
-          </AccordionItem>
+          <WordCard key={i} sentence={v} />
         ))}
       </Accordion>
     </Flex>
