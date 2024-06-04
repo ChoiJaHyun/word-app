@@ -15,7 +15,9 @@ const AnotherDailyWord: FC = () => {
   const onClickAudio = async () => {
     try {
       const response = await axios.post(
-        "https://texttospeech.googleapis.com/v1/text:synthesize?key=AIzaSyDTOET8PjC5osQiGI6V-W9m-upA9ri_1bo",
+        `https://texttospeech.googleapis.com/v1/text:synthesize?key=${
+          import.meta.env.VITE_API_KEY
+        }`,
         {
           input: {
             text: state.wordData.sentences[currentSentenceNumber]?.english,
@@ -50,6 +52,8 @@ const AnotherDailyWord: FC = () => {
       document.body.appendChild(newAudio);
 
       newAudio.play();
+      console.log(newAudio);
+      console.log(blob);
     } catch (error) {
       console.error(error);
     }
