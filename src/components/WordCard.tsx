@@ -38,7 +38,21 @@ const WordCard: FC<WordCardProps> = ({ sentence }) => {
         }
       );
 
-      console.log(response);
+      const binaryData = atob(response.data.audioContent);
+
+      const byteArray = new Uint8Array(binaryData.length);
+
+      for (let i = 0; i < binaryData.length; i++) {
+        byteArray[i] = binaryData.charCodeAt(i);
+      }
+
+      const blob = new Blob([byteArray.buffer], { type: "audio/mp3" });
+
+      const newAudio = new Audio(URL.createObjectURL(blob));
+
+      document.body.appendChild(newAudio);
+
+      newAudio.play();
     } catch (error) {
       console.error(error);
     }
